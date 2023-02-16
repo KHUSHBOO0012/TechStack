@@ -1,9 +1,14 @@
-Cache can be used at places like in web application layer to cache session objects.
-In Service layer to cache created objects if these objects are accessed frequently and their data is not modified very frequently.
+Cache makes our application performant by storing data in memory which otherwise would have taken 100-1000x time more time if queried from DB.
 
-Make your web application more performant.
+Cache can be used at places like 
+- in web application layer to cache session objects.
+- In Service layer to cache created objects if these objects are accessed frequently and their data is not modified very frequently.
 
-Redis is type of database. All of data is stored inside key value pair. Unlike normal Database that stores information on disk, Redis run inside RAM, So fast but volatile and is generally used for caching data. With caching data which is frequently accessed and is not changing much, time taken reduceds to around ~1ms to get data which would have otherwise taken 100-1000 ms if accessed from DB.
+
+Redis is type of database. All of data is stored inside key value pair. 
+Unlike normal Database that stores information on disk, Redis run inside RAM, So fast but volatile and is generally used for caching data.
+
+Setup
 
 brew install redis
 
@@ -146,12 +151,15 @@ Architecture
 It is [key -> Data Structure] store.
 Where Data Structure includes, Strings, Lists, SortedSets, Maps
 
-Now, we can directly append on entry to the lists instead of fetching whole blob and writing whole data back in Memcache.
+Now, we can directly append an entry to the lists instead of fetching whole blob and writing whole data back in Memcache.
 
-We can use redis as data store too, because in redis we can store data on disk and it allows to take backup and cluster can restarted and pre-populated with a backup.
+We can use redis as data store too, because in redis we can store data on disk and it allows to take backup and
+cluster can restarted and pre-populated with a backup.
 
 For scalability, Keys are distributed to different master node, and each master node does async replication to 
-some slave nodes which helps in Read load distribution as for read we can go to master or any of its slave. And In case master node goes down then one of its slave can be elected as master and that provides us high availability.
+some slave nodes. These slave nodes help in Read load distribution, as for read we can go to master or any of its slave.
+
+And In case master node goes down then one of its slave can be elected as master and that provides us high availability.
 
 cons:
 data store mode requres fixed number of nodes but cache mode is suitable for node scaling,
@@ -163,7 +171,9 @@ Redis is well known for in-memory data store. If you need messaging to send to s
 Architecture
  Lets say in below image on node 1, subscriber 1 and 2 are connected. On node 2, subscriber 3 and 4 are connected.
  And these are connected with long lived TCP connection. 
- publisher has subscribed to node 2. and message delivered to node 2 will be delivered to subcriber 3 and 4 immediately and node 2 also relay the message to node 1 and which is then sent to subscriber 1 and 2.
+ publisher has subscribed to node 2. and message delivered to node 2 will be delivered to subcriber 3 and 4 immediately and
+ node 2 also relay the message to node 1 and which is then sent to subscriber 1 and 2.
+ 
  if subcriber goes down at that time then subscriber will not get message. Redis won't retry to deliver the message.
 
  Useful for making leaderboard dashboard.
@@ -183,9 +193,7 @@ RabbitMQ Transient
 Delivery acknowledgement
 Deletion of delivered messages.
 
-
-
 can also be used as messaging queue.
-Reference: https://www.youtube.com/watch?v=jgpVdJB2sKQ&ab_channel=WebDevSimplified
-
-https://jsonplaceholder.typicode.com/photos
+Reference: 
+https://www.youtube.com/watch?v=jgpVdJB2sKQ&ab_channel=WebDevSimplified
+https://nutanix.udemy.com/course/developer-to-architect/learn/lecture/24984768#questions
