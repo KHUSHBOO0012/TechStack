@@ -54,14 +54,14 @@ Million operations per second
 Cons:
 Delivery not guaranted.
 
-Comparison 
-Kafka
+Comparison  
+Kafka  
 No Push
 Writes to log
 
-RabbitMQ Transient
-Delivery acknowledgement
-Deletion of delivered messages.
+RabbitMQ Transient  
+Delivery acknowledgement  
+Deletion of delivered messages.  
 
 can also be used as messaging queue.
 
@@ -205,5 +205,5 @@ redis-cli shutdown -> shutdown redis server
 My Example Code: https://github.com/KHUSHBOO0012/TechStack/blob/main/Src/Redis/main.go
 
 Reference: 
-https://www.youtube.com/watch?v=jgpVdJB2sKQ&ab_channel=WebDevSimplified
+https://www.youtube.com/watch?v=jgpVdJB2sKQ&ab_channel=WebDevSimplified  
 https://nutanix.udemy.com/course/developer-to-architect/learn/lecture/24984768#questions
